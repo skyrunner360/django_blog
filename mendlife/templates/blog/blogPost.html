@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% comment %} this file inherits the base html file by using the line below {% endcomment %}
+{% block title %}BlogPost{% endblock title %}
+{% block css %}
+.pad{
+  padding-bottom: 200px;
+}
+{% endblock css %}
+{% block blogactive %}active
+{% endblock blogactive %}
+{% block body %}
+{% if post %}
+<div class="text-gray-500 bg-gray-900 body-font pad">
+<div class="blog-post container py-3">
+<h2 class="blog-post-title" data-aos="fade-up"  data-aos-duration="3000">{{post.title}}</h2>
+<p class="blog-post-meta">At {{post.timeStamp}} By- <a href="/about">{{post.author}}</a></p>
+<pre class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{post.content|wordwrap:100}}</pre>
+ <div class="flex flex-wrap md:-m-2 -m-1">
+      <div class="flex flex-wrap w-1/2">
+        {% if post.img %}
+        <div class="md:p-2 p-1 w-1/2">
+          <img alt="gallery" data-aos="flip-left"  data-aos-duration="3000" class="w-full object-cover h-full object-center block" src="{{post.img.url}}">
+        </div>{% endif %}
+        {% if post.img2 %}
+        <div class="md:p-2 p-1 w-1/2">
+          <img alt="gallery" data-aos="flip-right"  data-aos-duration="3000" class="w-full object-cover h-full object-center block" src="{{post.img2.url}}">
+        </div>{% endif %}
+        {% if post.img3 %}
+        <div class="md:p-2 p-1 w-full">
+          <img alt="gallery" data-aos="flip-left"  data-aos-duration="3000" class="w-afull h-afull object-cover object-center block" src="{{post.img3.url}}">
+        </div>{% endif %}
+      </div>
+      {% if post.img4 %}
+      <div class="flex flex-wrap w-1/2">
+        <div class="md:p-2 p-1 w-full">
+          <img alt="gallery" data-aos="flip-right"  data-aos-duration="3000" class="w-full h-full object-cover object-center block" src="{{post.img4.url}}">
+        </div>{% endif %}
+        {% if post.img5 %}
+        <div class="md:p-2 p-1 w-1/2">
+          <img alt="gallery" data-aos="flip-left"  data-aos-duration="3000" class="w-full object-cover h-full object-center block" src="{{post.img5.url}}">
+        </div>{% endif %}
+        {% if post.img6 %}
+        <div class="md:p-2 p-1 w-1/2">
+          <img alt="gallery" data-aos="flip-right"  data-aos-duration="3000" class="w-full object-cover h-full object-center block" src="{{post.img6.url}}">
+        </div>{% endif %}
+      </div>
+    </div>
+</div>
+</div>
+{% else %}
+<div class="text-gray-500 bg-gray-900 body-font pad">
+<div class="blog-post container py-3">
+<h2 class="blog-post-title" data-aos="fade-up"  data-aos-duration="3000">{{tech.title}}</h2>
+<p class="blog-post-meta">At {{tech.timeStamp}} By- <a href="/about">{{tech.author}}</a></p>
+<pre class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{tech.content|wordwrap:100}}</pre>
+{% if tech.img %}
+<img data-aos="flip-left"  data-aos-duration="3000" src="{{tech.img.url}}" alt="Image">
+{% else %}
+<img data-aos="flip-left"  data-aos-duration="3000" src="https://source.unsplash.com/720x600/?computer,programming" alt="Image">
+{% endif %}
+</div>
+</div>
+{% endif %}
+{% endblock body %}
+{% block script %}
+AOS.init();
+{% endblock script %}
