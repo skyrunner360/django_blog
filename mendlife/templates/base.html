@@ -101,27 +101,27 @@
                        {% csrf_token %}
                       <div class="form-group">
                       <label for="username">User Name</label>
-                      <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique Username">
+                      <input type="text" required class="form-control" id="username" name="username" placeholder="Choose a unique Username">
                       </div>
                       <div class="form-group">
                       <label for="fname">First Name</label>
-                      <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
+                      <input type="text" required class="form-control" id="fname" name="fname" placeholder="First Name">
                       </div>
                       <div class="form-group">
                       <label for="lname">Last Name</label>
-                      <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
+                      <input type="text" required class="form-control" id="lname" name="lname" placeholder="Last Name">
                       </div>
                       <div class="form-group">
-                      <label for="username">Email address</label>
-                      <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
+                      <label for="email">Email address</label>
+                      <input type="email" required class="form-control" id="email" name="email" placeholder="name@example.com">
                       </div>
                       <div class="form-group">
                       <label for="pass1">Choose a Password</label>
-                      <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password">
+                      <input type="password" required class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password">
                       </div>
                       <div class="form-group">
                       <label for="pass2">Confirm Password</label>
-                      <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
+                      <input type="password" required class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
                       </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
@@ -148,11 +148,11 @@
                     <form>
                       <div class="form-group">
                       <label for="loginusername">User Name</label>
-                      <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter Your Username">
+                      <input type="text" required class="form-control" id="loginusername" name="loginusername" placeholder="Enter Your Username">
                       </div>
                       <div class="form-group">
                       <label for="loginpass">Password</label>
-                      <input type="password" class="form-control" id="loginpass" name="loginpass" placeholder="Choose Your Password">
+                      <input type="password" required class="form-control" id="loginpass" name="loginpass" placeholder="Choose Your Password">
                       </div>
                         <button type="button" class="btn btn-primary">Submit</button>
                       </div>
