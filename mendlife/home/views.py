@@ -61,9 +61,15 @@ def handleSignup(request):
         pass2 = request.POST['pass2']
 
         #Check for errorneous inputs
+        #Username should be under 15 Characters
         if len(username) > 15:
             messages.error(request,"Your Username must be under 15 characters ")
             return redirect('home')
+        #Username should be alphanumeric
+        if not username.isalnum() :
+            messages.error(request,"Username Should only contain letters and numbers")
+            return redirect('home')
+        #Both Passwords should match
         if pass1 != pass2:
             messages.error(request,"Passwords Do not Match")
             return redirect('home')
