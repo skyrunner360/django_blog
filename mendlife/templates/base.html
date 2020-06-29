@@ -2,6 +2,7 @@
 
 <html lang="en">
 {% comment %} This is the Base Template. Any changes here will reflect on the whole website {% endcomment %}
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,19 +10,22 @@
 
     <!-- Bootstrap CSS -->
     <style>
-    .footer {
-   position:fixed;
-   bottom:0;
-   top: 850px;
-   width:100%;
-}
-.pad{
-  padding-bottom: 200px;
-}
-    {% block css %}
-    {% endblock css %}
+        .footer {
+            position: fixed;
+            bottom: 0;
+            top: 850px;
+            width: 100%;
+        }
+        
+        .pad {
+            padding-bottom: 200px;
+        }
+        
+        {% block css %}
+        
+        {% endblock css %}
     </style>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -30,14 +34,13 @@
 
 <body>
     <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0" nonce="rwklcDNi"></script>
-{% comment %} Navbar Section {% endcomment %}
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0" nonce="rwklcDNi"></script>
+    {% comment %} Navbar Section {% endcomment %}
     <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Me and Life</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item {% block homeactive %}{% endblock homeactive %}">
@@ -46,11 +49,11 @@
                 <li class="nav-item {% block aboutactive %}{% endblock aboutactive %}">
                     <a class="nav-link" href="/about"><i class="fas fa-user-circle mx-2"></i>About Me</a>
                 </li>
-                 <li class="nav-item {% block contactactive %}
+                <li class="nav-item {% block contactactive %}
                  {% endblock contactactive %}">
                     <a class="nav-link" href="/contact"><i class="fas fa-id-badge mx-2"></i>Contact Me</a>
                 </li>
-                 <li class="nav-item {% block blogactive %}
+                <li class="nav-item {% block blogactive %}
                  {% endblock blogactive %}">
                     <a class="nav-link" href="/blog"><i class="fas fa-blog mx-2"></i>Blog</a>
                 </li>
@@ -60,76 +63,169 @@
                 </li>
 
             </ul>
-            <form method="get" action="/search" class="form-inline my-2 my-lg-0">
+            <form method="get" action="/search" class="form-inline my-2 my-lg-0 mx-5">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search this site" aria-label="Search" name="query" id="query">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fas fa-search mx-1"></i>Search</button>
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i
+            class="fas fa-search mx-1"></i>Search</button>
             </form>
+                <!-- Button to trigger signup modal -->
+                <button type="button" class="btn btn-success mx-1 my-sm-0" data-toggle="modal" data-target="#loginModal">
+          Login
+        </button>
+                <button type="button" class="btn btn-success mx-1 my-sm-0" data-toggle="modal" data-target="#signupModal">
+          SignUp
+        </button>
         </div>
     </nav>
-    {% comment %} Django Messages Section {% endcomment %}
-    {% for message in messages %}
+    {% comment %} Django Messages Section {% endcomment %} {% for message in messages %}
     <div class="alert alert-{{message.tags}} mb-0 alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-exclamation-triangle mx-2"></i>Message: </strong> {{message}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-{% endfor %}
-<div class="text-gray-500 bg-gray-900 body-font pad">
-    {% block body %}
-    {% endblock body %}
-</div>
-{% comment %} Footer Section {% endcomment %}
-<footer class="footer text-gray-500 bg-gray-900 body-font">
-  <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-    <a class="flex title-font font-medium items-center md:justify-start justify-center text-white" href="/" style="text-decoration: none;">
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-      </svg>
-      <span class="ml-3 text-xl">Me and Life</span>
-    </a>
-    <p class="text-sm text-gray-600 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4">© 2020 Me and Life —
-      <a href="https://twitter.com/Skyrunner360" class="text-gray-500 ml-1" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">@Skyrunner360</a>
-    </p>
-    <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-      <a class="text-gray-600" href="https://www.facebook.com/rishi.mathur.739/" style="text-decoration: none;">
-        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+        <strong><i class="fas fa-exclamation-triangle mx-2"></i>Message: </strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    {% endfor %}
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupModaltitle">SignUp Here</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    {% comment %} Signup Form {% endcomment %}
+                    <form>
+                      <div class="form-group">
+                      <label for="username">User Name</label>
+                      <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique Username">
+                      </div>
+                      <div class="form-group">
+                      <label for="fname">First Name</label>
+                      <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
+                      </div>
+                      <div class="form-group">
+                      <label for="lname">Last Name</label>
+                      <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
+                      </div>
+                      <div class="form-group">
+                      <label for="username">Email address</label>
+                      <input type="text" class="form-control" id="username" name="username" placeholder="name@example.com">
+                      </div>
+                      <div class="form-group">
+                      <label for="pass1">Choose a Password</label>
+                      <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password">
+                      </div>
+                      <div class="form-group">
+                      <label for="pass2">Confirm Password</label>
+                      <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
+                      </div>
+                        <button type="button" class="btn btn-primary">Submit</button>
+                      </div>
+                      </form>
+                      </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModaltitle">Login Here</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    {% comment %} Signup Form {% endcomment %}
+                    <form>
+                      <div class="form-group">
+                      <label for="loginusername">User Name</label>
+                      <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter Your Username">
+                      </div>
+                      <div class="form-group">
+                      <label for="loginpass">Password</label>
+                      <input type="password" class="form-control" id="loginpass" name="loginpass" placeholder="Choose Your Password">
+                      </div>
+                        <button type="button" class="btn btn-primary">Submit</button>
+                      </div>
+                      </form>
+                      </div>
+                <div class="modal-footer">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-gray-500 bg-gray-900 body-font pad">
+        {% block body %} {% endblock body %}
+    </div>
+    {% comment %} Footer Section {% endcomment %}
+    <footer class="footer text-gray-500 bg-gray-900 body-font">
+        <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+            <a class="flex title-font font-medium items-center md:justify-start justify-center text-white" href="/" style="text-decoration: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
         </svg>
-      </a>
-      <a class="ml-3 text-gray-600" href="https://twitter.com/Skyrunner360" style="text-decoration: none;">
-        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-        </svg>
-      </a>
-      <a class="ml-3 text-gray-600" href="https://www.instagram.com/skyrunner360/" style="text-decoration: none;">
-        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-        </svg>
-      </a>
-      <a class="ml-3 text-gray-600" href="https://www.linkedin.com/in/rishi-mathur-334874174/" style="text-decoration: none;">
-        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
-          <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                <span class="ml-3 text-xl">Me and Life</span>
+            </a>
+            <p class="text-sm text-gray-600 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4">© 2020 Me and Life —
+                <a href="https://twitter.com/Skyrunner360" class="text-gray-500 ml-1" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">@Skyrunner360</a>
+            </p>
+            <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+        <a class="text-gray-600" href="https://www.facebook.com/rishi.mathur.739/" style="text-decoration: none;">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+            viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-600" href="https://twitter.com/Skyrunner360" style="text-decoration: none;">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+            viewBox="0 0 24 24">
+            <path
+              d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+            </path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-600" href="https://www.instagram.com/skyrunner360/" style="text-decoration: none;">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            class="w-5 h-5" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-600" href="https://www.linkedin.com/in/rishi-mathur-334874174/"
+          style="text-decoration: none;">
+          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0"
+            class="w-5 h-5" viewBox="0 0 24 24">
+            <path stroke="none"
+              d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-600" href="https://github.com/skyrunner360">
+          <i class="fab fa-github"></i>
           <circle cx="4" cy="4" r="2" stroke="none"></circle>
-        </svg>
-      </a>
-      <a class="ml-3 text-gray-600" href="https://github.com/skyrunner360">
-        <i class="fab fa-github"></i>
-        <circle cx="4" cy="4" r="2" stroke="none"></circle>
-      </a>
+        </a>
 
-    </span>
-  </div>
-</footer>
+      </span>
+        </div>
+    </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script>{% block script %}
-    {% endblock script %}</script>
+    <script>
+        {% block script %} {% endblock script %}
+    </script>
 </body>
 
 </html>
