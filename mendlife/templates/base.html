@@ -144,17 +144,18 @@
           </button>
                 </div>
                 <div class="modal-body">
-                    {% comment %} Signup Form {% endcomment %}
-                    <form>
+                    {% comment %} Login Form {% endcomment %}
+                    <form action='/login' method='post'>
+                    {% csrf_token %}
                       <div class="form-group">
                       <label for="loginusername">User Name</label>
                       <input type="text" required class="form-control" id="loginusername" name="loginusername" placeholder="Enter Your Username">
                       </div>
                       <div class="form-group">
                       <label for="loginpass">Password</label>
-                      <input type="password" required class="form-control" id="loginpass" name="loginpass" placeholder="Choose Your Password">
+                      <input type="password" required class="form-control" id="loginpassword" name="loginpassword" placeholder="Choose Your Password">
                       </div>
-                        <button type="button" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
                       </form>
                       </div>

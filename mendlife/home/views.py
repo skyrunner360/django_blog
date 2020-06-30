@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from home.models import Contact
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
 from blog.models import Post, Tech
 from writings.models import Writing
 from itertools import chain
@@ -83,3 +84,22 @@ def handleSignup(request):
 
     else:
         return HttpResponse('404- Not Found')
+def handleLogin(request):
+    if request.method == 'POST':
+        #Get the Post Parameters
+        loginusername = request.POST['loginusername']
+        loginpassword = request.POST['loginpassword']
+        user = authenticate(username=loginusername, password=loginpassword)
+        if user is not None:
+            login(request,user)
+            messages.success(request,"Successfully Logged in")
+            return redirect('home')
+        else:
+            messages.error(request,"Invalid Credentials, Please try again")
+            return redirect('home')
+
+    return HttpResponse('404- Not Found')
+def handleLogout(request):
+    logout(request)
+    messages.success(request,"Successfully Logged Out!")
+    return redirect('home')
