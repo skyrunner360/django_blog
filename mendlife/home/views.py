@@ -10,6 +10,7 @@ from django.db.models import Q
 
 
 # Create your views here.
+# HTML Pages
 def home(request):
     #get all posts from blog model
     allpost = Writing.objects.all()
@@ -51,6 +52,7 @@ def search(request):
     #     messages.warning(request,"No search results found please refine your query")
     params = {'allpost': allpost,'query':query}
     return render(request,'home/search.html',params)
+# Authentication APIs
 def handleSignup(request):
     if request.method == 'POST':
         #Get the Post Parameters
