@@ -63,18 +63,33 @@
                 </li>
 
             </ul>
-            <form method="get" action="/search" class="form-inline my-2 my-lg-0 mx-5">
+            <div class="ml-auto form-inline">
+            <form method="get" action="/search" class="my-2 my-lg-0 mx-5">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search this site" aria-label="Search" name="query" id="query">
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i
             class="fas fa-search mx-1"></i>Search</button>
             </form>
-                <!-- Button to trigger signup modal -->
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav mr-2">
+             <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Welcome {{request.user}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
+        </ul>
+            {% else %}
+                <!-- Button to trigger Login modal -->
                 <button type="button" class="btn btn-success mx-1 my-sm-0" data-toggle="modal" data-target="#loginModal">
           Login
         </button>
+                <!-- Button to trigger Signup modal -->
                 <button type="button" class="btn btn-success mx-1 my-sm-0" data-toggle="modal" data-target="#signupModal">
           SignUp
         </button>
+        {% endif %}
+        </div>
         </div>
     </nav>
     {% comment %} Django Messages Section {% endcomment %} {% for message in messages %}
