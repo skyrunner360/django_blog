@@ -47,7 +47,17 @@
     </div>
     <div class="container">
     <div class="fb-like my-2 text-gray-500 bg-gray-900 body-font" data-href="http://skyrunner360.pythonanywhere.com" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div><br>
-    <div class="fb-comments my-1 text-gray-500 bg-gray-900 body-font" data-href="https://skyrunner360.pythonanywhere.com" data-numposts="5" data-width=""></div>
+    <h2>Comments</h2>
+    <form action="/blog/postComment" method="post">{% csrf_token %}
+    <input type="text" name="comment" placeholder ="Enter Comment Here">
+    <input type="hidden" name="postSno" value="{{post.sno}}">
+    <input type="text">
+    <input type="submit" value="Submit">
+    </form>
+    <div class="row my-3">
+    <div class="col-md-2"> Image Here</div>
+    <div class="col-md-10">Comment Here</div>
+    </div>
     </div>
 </div> 
 </div>
