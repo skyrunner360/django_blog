@@ -38,7 +38,8 @@ class BlogComment(models.Model):
     sno = models.AutoField(primary_key = True)
     comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,null=True)
+    tech = models.ForeignKey(Tech, on_delete=models.CASCADE,null=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
     timestamp = models.DateTimeField(default=now)
 

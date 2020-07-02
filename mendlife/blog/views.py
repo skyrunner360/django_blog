@@ -14,7 +14,7 @@ def blogPost(request,slug):
     post = Post.objects.filter(slug=slug).first()
     tech = Tech.objects.filter(slug=slug).first()
     pcomments = BlogComment.objects.filter(post=post)
-    tcomments = BlogComment.objects.filter(post=tech)
+    tcomments = BlogComment.objects.filter(tech=tech)
     context = {'post': post,'tech':tech,'pcomments':pcomments,'tcomments':tcomments}
     return render(request,'blog/blogPost.html',context)
 # The below function takes slug as another argument and passes it to blogpost like the commented line shown below
@@ -23,10 +23,17 @@ def postComment(request):
     if request.method=="POST":
         comment = request.POST.get("comment")
         user = request.user
-        postSno = request.POST.get("postSno") 
-        post = Post.objects.get(sno=postSno)
-
-        comment = BlogComment(comment=comment,user=user,post=post)
-        comment.save()
-        messages.success(request,"Your Comment has been posted successfully")
-    return redirect("/blog/{post.slug}")
+        if request.POST.get("postSno"):
+            postSno = request.POST.get("postSno") 
+            post = Post.objects.get(sno=postSno)
+            comment = BlogComment(comment=comment,user=user,post=post)
+            comment.save()
+            messages.success(request,"Your Comment has been posted successfully")
+            return redirect(f"/blog/{post.slug}")
+        else:
+            techSno = request.POST.get("techSno") 
+            tech = Tech.objects.get(sno=techSno)
+            comment = BlogComment(comment=comment,user=user,tech=tech)
+            comment.save()
+            messages.success(request,"Your Comment has been posted successfully")
+            return redirect(f"/blog/{tech.slug}")
