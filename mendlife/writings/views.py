@@ -10,7 +10,8 @@ def wHome(request):
 def wPost(request,slug):
     w = Writing.objects.filter(slug=slug).first()
     comments = WComment.objects.filter(wpost=w)
-    context = {'writings': w,'comments': comments}
+    context = {'writings': w,'comments': comments,
+     'user' : request.user}
     return render(request,'writings/wPost.html', context)
 def postComment(request):
     if request.method=="POST":

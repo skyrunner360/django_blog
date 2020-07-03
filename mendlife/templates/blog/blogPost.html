@@ -9,6 +9,7 @@
 {% block blogactive %}active
 {% endblock blogactive %}
 {% block body %}
+{% load humanize %}
 {% comment %} Post Section (Life Update Posts) {% endcomment %}
 {% if post %}
 <div class="text-gray-500 bg-gray-900 body-font pad">
@@ -48,7 +49,8 @@
     </div>
     <div class="container">
     <div class="fb-like my-2 text-gray-500 bg-gray-900 body-font" data-href="http://skyrunner360.pythonanywhere.com" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div><br>
-    <h2>Comments</h2>
+    <h2>Comments ({{pcomments.count}})</h2>
+    {% if user.is_authenticated %}
     <form action="/blog/postComment" method="post">{% csrf_token %}
   <div class="form-group">
     <label for="exampleInputEmail1">Post Comment</label>
@@ -59,11 +61,14 @@
   </div>
   <button type="submit" class="btn btn-primary" value="submit">Submit</button>
 </form>
+    {% else %}
+    <p>Please Login to Post Comment</p>
+    {% endif %}
 {% for comment in pcomments %}
     <div class="row my-3">
-    <div class="col-md-1"> Image Here</div>
+    <div class="col-md-1"> <i class="fas fa-user rounded border border-dark p-3"></i></div>
     <div class="col-md-11">
-    <b>{{comment.user.username}}</b> at {{comment.timestamp}}
+    <b>{{comment.user.username}}</b> <span class="badge badge-pill badge-secondary">{{comment.timestamp|naturaltime}}</span>
     <div>{{comment.comment}}</div>
     </div>
     </div>
@@ -85,7 +90,8 @@
 {% endif %}
 <div class="container">
     <div class="fb-like my-2 text-gray-500 bg-gray-900 body-font" data-href="http://skyrunner360.pythonanywhere.com" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div><br>
-    <h2>Comments</h2>
+    <h2>Comments ({{tcomments.count}})</h2>
+    {% if user.is_authenticated %}
     <form action="/blog/postComment" method="post">{% csrf_token %}
   <div class="form-group">
     <label for="exampleInputEmail1">Post Comment</label>
@@ -96,11 +102,14 @@
   </div>
   <button type="submit" class="btn btn-primary" value="submit">Submit</button>
 </form>
+    {% else %}
+    <p>Please Login to Post Comment</p>
+    {% endif %}
 {% for comment in tcomments %}
     <div class="row my-3">
-    <div class="col-md-1"> Image Here</div>
+    <div class="col-md-1"> <i class="fas fa-user rounded border border-dark p-3"></i></div>
     <div class="col-md-11">
-    <b>{{comment.user.username}}</b> at {{comment.timestamp}}
+    <b>{{comment.user.username}}</b> <span class="badge badge-pill badge-secondary">{{comment.timestamp | naturaltime}}</span>
     <div>{{comment.comment}}</div>
     </div>
     </div>
