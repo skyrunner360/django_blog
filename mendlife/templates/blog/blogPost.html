@@ -10,6 +10,7 @@
 {% endblock blogactive %}
 {% block body %}
 {% load humanize %}
+{% load extras %}
 {% comment %} Post Section (Life Update Posts) {% endcomment %}
 {% if post %}
 <div class="text-gray-500 bg-gray-900 body-font pad">
@@ -58,6 +59,7 @@
   </div>
   <div class="form-group form-check">
     <input type="hidden" name="postSno" value="{{post.sno}}">
+    <input type="hidden" name="parentSno" value="">
   </div>
   <button type="submit" class="btn btn-primary" value="submit">Submit</button>
 </form>
@@ -70,7 +72,31 @@
     <div class="col-md-11">
     <b>{{comment.user.username}}</b> <span class="badge badge-pill badge-secondary">{{comment.timestamp|naturaltime}}</span>
     <div>{{comment.comment}}</div>
+    {% comment %} Reply Section {% endcomment %}
+    <div class="reply mx-0">
+  <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replybox{{comment.sno}}" aria-expanded="false" aria-controls="replybox{{comment.sno}}">
+    Reply
+  </button>
+<div class="collapse" id="replybox{{comment.sno}}">
+  <div class="card card-body my-2 bg-secondary">
+    <form action="/blog/postComment" method="post">{% csrf_token %}
+  <div class="form-group">
+    <label for="comment">Post A Reply</label>
+    <input type="text" class="form-control" name="comment" placeholder ="Add a reply...">
+    <input type="hidden" name="parentSno" value="{{comment.sno}}">
+  </div>
+  <div class="form-group form-check">
+    <input type="hidden" name="postSno" value="{{post.sno}}">
+  </div>
+  <button type="submit" class="btn btn-sm btn-primary" value="submit">Submit</button>
+</form>
+  </div>
     </div>
+    <div class="replies my-2">
+{% for reply in preplyDict|get_val:comment.sno %}
+{{reply}}<br>
+{% endfor %}
+</div>
     </div>
     </div>
 {% endfor %}
@@ -99,6 +125,7 @@
   </div>
   <div class="form-group form-check">
     <input type="hidden" name="techSno" value="{{tech.sno}}">
+    <input type="hidden" name="parentSno" value="">
   </div>
   <button type="submit" class="btn btn-primary" value="submit">Submit</button>
 </form>
@@ -111,7 +138,31 @@
     <div class="col-md-11">
     <b>{{comment.user.username}}</b> <span class="badge badge-pill badge-secondary">{{comment.timestamp | naturaltime}}</span>
     <div>{{comment.comment}}</div>
+    {% comment %} Reply Section {% endcomment %}
+    <div class="reply mx-0">
+  <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replybox{{comment.sno}}" aria-expanded="false" aria-controls="replybox{{comment.sno}}">
+    Reply
+  </button>
+<div class="collapse" id="replybox{{comment.sno}}">
+  <div class="card card-body my-2 bg-secondary">
+    <form action="/blog/postComment" method="post">{% csrf_token %}
+  <div class="form-group">
+    <label for="comment">Post A Reply</label>
+    <input type="text" class="form-control" name="comment" placeholder ="Add a reply...">
+    <input type="hidden" name="parentSno" value="{{comment.sno}}">
+  </div>
+  <div class="form-group form-check">
+    <input type="hidden" name="techSno" value="{{tech.sno}}">
+  </div>
+  <button type="submit" class="btn btn-sm btn-primary" value="submit">Submit</button>
+</form>
+  </div>
     </div>
+    <div class="replies my-2">
+{% for reply in treplyDict|get_val:comment.sno %}
+{{reply}}<br>
+{% endfor %}
+</div>
     </div>
     </div>
 {% endfor %}

@@ -4,6 +4,7 @@
 {% block writingactive %}active
 {% endblock writingactive %}
 {% block body %}
+{% load extras %}
 <div class="text-gray-500 bg-gray-900 body-font pad">
 <div class="blog-post container py-3">
 <h2 class="blog-post-title" data-aos="fade-up"  data-aos-duration="3000">{{writings.title}}</h2>
@@ -21,11 +22,12 @@
     {% if user.is_authenticated %}
      <form action="/writings/postComment" method="post">{% csrf_token %}
   <div class="form-group">
-    <label for="exampleInputEmail1">Post Comment</label>
+    <label for="comment">Post Comment</label>
     <input type="text" class="form-control" name="comment" placeholder ="Add a Comment">
   </div>
   <div class="form-group form-check">
     <input type="hidden" name="wSno" value="{{writings.sno}}">
+    <input type="hidden" name="parentSno" value="">
   </div>
   <button type="submit" class="btn btn-primary" value="submit">Submit</button>
 </form>
@@ -41,6 +43,32 @@
     <div class="col-md-11">
     <b>{{comment.user.username}}</b> <span class="badge badge-pill badge-secondary">{{comment.timestamp | naturaltime}}</span>
     <div>{{comment.comment}}</div>
+    {% comment %} Reply Section {% endcomment %}
+    <div class="reply mx-0">
+  <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replybox{{comment.sno}}" aria-expanded="false" aria-controls="replybox{{comment.sno}}">
+    Reply
+  </button>
+<div class="collapse" id="replybox{{comment.sno}}">
+  <div class="card card-body my-2 bg-secondary">
+    <form action="/writings/postComment" method="post">{% csrf_token %}
+  <div class="form-group">
+    <label for="comment">Post A Reply</label>
+    <input type="text" class="form-control" name="comment" placeholder ="Add a reply...">
+    <input type="hidden" name="parentSno" value="{{comment.sno}}">
+  </div>
+  <div class="form-group form-check">
+    <input type="hidden" name="wSno" value="{{writings.sno}}">
+  </div>
+  <button type="submit" class="btn btn-sm btn-primary" value="submit">Submit</button>
+</form>
+  </div>
+</div>
+<div class="replies my-2">
+{% for reply in replyDict|get_val:comment.sno %}
+{{reply}}<br>
+{% endfor %}
+</div>
+    </div>
     </div>
     </div>
     </div>
