@@ -29,7 +29,7 @@
     <input type="hidden" name="wSno" value="{{writings.sno}}">
     <input type="hidden" name="parentSno" value="">
   </div>
-  <button type="submit" class="btn btn-primary" value="submit">Submit</button>
+  <button type="submit" class="btn btn-secondary" value="submit">Comment</button>
 </form>
     {% else %}
     <p>Please Login to post a Comment</p>
@@ -45,7 +45,8 @@
     <div>{{comment.comment}}</div>
     {% comment %} Reply Section {% endcomment %}
     <div class="reply mx-0">
-  <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replybox{{comment.sno}}" aria-expanded="false" aria-controls="replybox{{comment.sno}}">
+    {% if user.is_authenticated %}
+  <button class="btn btn-sm btn-secondary" type="button" data-toggle="collapse" data-target="#replybox{{comment.sno}}" aria-expanded="false" aria-controls="replybox{{comment.sno}}">
     Reply
   </button>
 <div class="collapse" id="replybox{{comment.sno}}">
@@ -59,13 +60,27 @@
   <div class="form-group form-check">
     <input type="hidden" name="wSno" value="{{writings.sno}}">
   </div>
-  <button type="submit" class="btn btn-sm btn-primary" value="submit">Submit</button>
+  <button type="submit" class="btn btn-sm btn-primary" value="submit">Reply</button>
 </form>
   </div>
 </div>
+{% else %}
+<button class="btn btn-sm btn-secondary disabled" type="button" data-toggle="collapse" data-target="#replybox{{comment.sno}}" aria-expanded="false" aria-controls="replybox{{comment.sno}}">
+   Login to Reply
+  </button>
+{% endif %}
 <div class="replies my-2">
 {% for reply in replyDict|get_val:comment.sno %}
-{{reply}}<br>
+<div class="row my-2">
+<div class="col-md-1">
+<i class="fas fa-user rounded border border-dark p-3 my-2"></i>
+</div>
+<div class="col-md-11 my-3">
+<div class="col-md-11">
+    <b>{{reply.user.username}}</b> <span class="badge badge-pill badge-secondary">{{reply.timestamp | naturaltime}}</span>
+    <div>{{reply.comment}}</div>
+</div>
+</div>
 {% endfor %}
 </div>
     </div>
