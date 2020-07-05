@@ -17,7 +17,7 @@
 <div class="blog-post container py-3">
 <h2 class="blog-post-title" data-aos="fade-up"  data-aos-duration="3000">{{post.title}}</h2>
 <p class="blog-post-meta">At {{post.timeStamp}} By- <a href="/about">{{post.author}}</a></p>
-<pre class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{post.content|wordwrap:100}}</pre>
+<div class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{post.content|wordwrap:100|safe}}</div>
  <div class="flex flex-wrap md:-m-2 -m-1">
       <div class="flex flex-wrap w-1/2">
         {% if post.img %}
@@ -123,7 +123,7 @@
 <div class="blog-post container py-3">
 <h2 class="blog-post-title" data-aos="fade-up"  data-aos-duration="3000">{{tech.title}}</h2>
 <p class="blog-post-meta">At {{tech.timeStamp}} By- <a href="/about">{{tech.author}}</a></p>
-<pre class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{tech.content|wordwrap:100}}</pre>
+<div class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{tech.content|wordwrap:100|safe}}</div>
 {% if tech.img %}
 <img data-aos="flip-left"  data-aos-duration="3000" src="{{tech.img.url}}" alt="Image">
 {% else %}

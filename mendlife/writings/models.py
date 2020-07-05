@@ -8,6 +8,7 @@ class Writing(models.Model):
     sno= models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     content = models.TextField()
+    views = models.IntegerField(default=0)
     category = models.CharField(max_length=13)
     author = models.CharField(max_length=100)
     slug = models.CharField(max_length=150,default=" ")

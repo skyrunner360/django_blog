@@ -10,6 +10,8 @@ def wHome(request):
     return render(request,'writings/wHome.html', context)
 def wPost(request,slug):
     w = Writing.objects.filter(slug=slug).first()
+    w.views = w.views+1
+    w.save()
     comments = WComment.objects.filter(wpost=w, parent=None)
     replies = WComment.objects.filter(wpost=w).exclude(parent=None)
     #Creating Reply Dictionary and iterating it 

@@ -9,7 +9,7 @@
 <div class="blog-post container py-3">
 <h2 class="blog-post-title" data-aos="fade-up"  data-aos-duration="3000">{{writings.title}}</h2>
 <p class="blog-post-meta">At {{writings.timeStamp}} By- <a href="/about">{{writings.author}}</a></p>
-<pre class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{writings.content|wordwrap:100|linebreaks}}</pre>
+<div class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{writings.content|wordwrap:100|linebreaks|safe}}</div>
 {% if writings.img %}
 <img src="{{writings.img.url}}" alt="Image" data-aos="fade-up"  data-aos-duration="3000">
 {% else %}

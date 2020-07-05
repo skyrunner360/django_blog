@@ -13,7 +13,11 @@ def blogHome(request):
     return render(request,'blog/blogHome.html', context)
 def blogPost(request,slug):
     post = Post.objects.filter(slug=slug).first()
+    post.views = post.views+1
+    post.save() 
     tech = Tech.objects.filter(slug=slug).first()
+    tech.views = tech.views+1
+    tech.save()
     pcomments = BlogComment.objects.filter(post=post,parent=None)
     preplies = BlogComment.objects.filter(post=post).exclude(parent=None)
     #Creating Reply Dictionary and iterating it 
