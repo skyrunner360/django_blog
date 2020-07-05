@@ -13,7 +13,7 @@
         <div data-aos="fade-up"  data-aos-duration="3000" class="h-full bg-gray-800 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
           <h2 class="tracking-widest text-xs title-font font-medium text-gray-600 mb-1">{{i.category}}</h2>
           <a class="text-indigo-500 inline-flex items-center" href="/writings/{{i.slug}}" style="text-decoration:none;"><h1 class="title-font sm:text-2xl text-xl font-medium text-white mb-3">{{i.title}}</h1></a>
-          <p class="leading-relaxed mb-3">{{i.content|truncatechars:200}}</p>
+          <p class="leading-relaxed mb-3"><div class="preview">{{i.content|truncatechars:200|safe}}</div></p>
           <a class="text-indigo-500 inline-flex items-center" href="{{i.slug}}" style="text-decoration:none;">Continue Reading
             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14"></path>
@@ -40,4 +40,7 @@
 {% endblock body %}
 {% block script %}
 AOS.init();
+let prewiews = document.getElementsByClassName('preview');
+Array.from(prewiews).forEach((element)=>{
+element.innerHTML = element.innerText;
 {% endblock script %}
