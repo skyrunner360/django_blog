@@ -36,7 +36,7 @@ def blogPost(request,slug):
             treplyDict[reply.parent.sno] = [reply]
         else:
             treplyDict[reply.parent.sno].append(reply)
-    context = {'post': post,'tech':tech,'pcomments':pcomments,'tcomments':tcomments,'preplyDict':preplyDict,'treplyDict':treplyDict}
+    context = {'post': post,'tech': tech,'pcomments':pcomments,'tcomments':tcomments,'preplyDict':preplyDict,'treplyDict':treplyDict}
     return render(request,'blog/blogPost.html',context)
 # The below function takes slug as another argument and passes it to blogpost like the commented line shown below
     # return HttpResponse(f'This is Blogpost: {slug}')
