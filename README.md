@@ -14,3 +14,4 @@ Some features of it are -
 - Commenting restricted to logged in users only
 - views counter
 - search feature
+- Added Tiny MCE Editor for easier Content editing in Django Admin.
