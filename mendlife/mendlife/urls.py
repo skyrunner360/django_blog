@@ -18,6 +18,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.site_header = "Mendlife Admin"
+admin.site.site_title = "Mendlife Admin Panel"
+admin.site.index_title = "Welcome to Mendlife Admin Panel"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # The below line redirects to the home app's urls.py file

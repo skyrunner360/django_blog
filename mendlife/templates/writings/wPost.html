@@ -4,19 +4,90 @@
 {% block writingactive %}active
 {% endblock writingactive %}
 {% block body %}
+{% load extras %}
 <div class="text-gray-500 bg-gray-900 body-font pad">
 <div class="blog-post container py-3">
 <h2 class="blog-post-title" data-aos="fade-up"  data-aos-duration="3000">{{writings.title}}</h2>
 <p class="blog-post-meta">At {{writings.timeStamp}} By- <a href="/about">{{writings.author}}</a></p>
-<pre class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{writings.content|wordwrap:100|linebreaks}}</pre>
+<div class="text-gray-500" data-aos="fade-down"  data-aos-duration="3000">{{writings.content|wordwrap:100|linebreaks|safe}}</div>
 {% if writings.img %}
 <img src="{{writings.img.url}}" alt="Image" data-aos="fade-up"  data-aos-duration="3000">
 {% else %}
 <img src="https://source.unsplash.com/720x600/?writings,writer" alt="Image" data-aos="fade-up"  data-aos-duration="3000">
 {% endif %}
 <div class="container">
-<div class="fb-like my-2" data-href="http://skyrunner360.pythonanywhere.com" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div><br>
-<div class="fb-comments my-1" data-href="https://skyrunner360.pythonanywhere.com" data-numposts="5" data-width=""></div>
+    <div class="fb-like my-2 text-gray-500 bg-gray-900 body-font" data-href="http://skyrunner360.pythonanywhere.com" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div><br>
+    <h2>Comments ({{comments.count}})</h2>
+    <div class="my-2">
+    {% if user.is_authenticated %}
+     <form action="/writings/postComment" method="post">{% csrf_token %}
+  <div class="form-group">
+    <label for="comment">Post Comment</label>
+    <input type="text" class="form-control" name="comment" placeholder ="Add a Comment">
+  </div>
+  <div class="form-group form-check">
+    <input type="hidden" name="wSno" value="{{writings.sno}}">
+    <input type="hidden" name="parentSno" value="">
+  </div>
+  <button type="submit" class="btn btn-secondary" value="submit">Comment</button>
+</form>
+    {% else %}
+    <p>Please Login to post a Comment</p>
+    {% endif %}
+   
+    </div>
+{% for comment in comments %}
+{% load humanize %}
+    <div class="row my-3">
+    <div class="col-md-1"> <i class="fas fa-user rounded border border-dark p-3"></i></div>
+    <div class="col-md-11">
+    <b>{{comment.user.username}}</b> <span class="badge badge-pill badge-secondary">{{comment.timestamp | naturaltime}}</span>
+    <div>{{comment.comment}}</div>
+    {% comment %} Reply Section {% endcomment %}
+    <div class="reply mx-0">
+    {% if user.is_authenticated %}
+  <button class="btn btn-sm btn-secondary" type="button" data-toggle="collapse" data-target="#replybox{{comment.sno}}" aria-expanded="false" aria-controls="replybox{{comment.sno}}">
+    Reply
+  </button>
+<div class="collapse" id="replybox{{comment.sno}}">
+  <div class="card card-body my-2 bg-secondary">
+    <form action="/writings/postComment" method="post">{% csrf_token %}
+  <div class="form-group">
+    <label for="comment">Post A Reply</label>
+    <input type="text" class="form-control" name="comment" placeholder ="Add a reply...">
+    <input type="hidden" name="parentSno" value="{{comment.sno}}">
+  </div>
+  <div class="form-group form-check">
+    <input type="hidden" name="wSno" value="{{writings.sno}}">
+  </div>
+  <button type="submit" class="btn btn-sm btn-primary" value="submit">Reply</button>
+</form>
+  </div>
+</div>
+{% else %}
+<button class="btn btn-sm btn-secondary disabled" type="button" data-toggle="collapse" data-target="#replybox{{comment.sno}}" aria-expanded="false" aria-controls="replybox{{comment.sno}}">
+   Login to Reply
+  </button>
+{% endif %}
+<div class="replies my-2">
+{% for reply in replyDict|get_val:comment.sno %}
+<div class="row my-2">
+<div class="col-md-1">
+<i class="fas fa-user rounded border border-dark p-3 my-2"></i>
+</div>
+<div class="col-md-11 my-3">
+<div class="col-md-11">
+    <b>{{reply.user.username}}</b> <span class="badge badge-pill badge-secondary">{{reply.timestamp | naturaltime}}</span>
+    <div>{{reply.comment}}</div>
+</div>
+</div>
+{% endfor %}
+</div>
+    </div>
+    </div>
+    </div>
+    </div>
+{% endfor %}
 </div>
 </div>
 </div>

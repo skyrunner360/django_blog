@@ -1,2 +1,5 @@
 {
+    "python.venvPath": "~/django_blog/mendlife/myblogenv/bin/",
+    "files.associations": {
+    }
 }
