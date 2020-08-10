@@ -1,10 +1,10 @@
 # Django Blog
 This blog is hosted on pythonanywhere as skyrunner360.pythonanywhere.com
 
+- This repo is for it's development Purposes
+
 
 ![GitHub followers](https://img.shields.io/github/followers/skyrunner360?label=Follow&style=social) ![Twitter Follow](https://img.shields.io/twitter/follow/skyrunner360?style=social)
-
-- This repo is for it's development Purposes
 
 ## Completed Blog along with some test features
 
